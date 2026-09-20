@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "jvoice"
+version = "0.1.0"
+description = "An open voice node and full-duplex streaming host"
+requires-python = ">=3.11"
+license = "MIT"
+dependencies = ["websockets>=14,<16", "httpx>=0.28,<0.29", "numpy>=1.26,<3"]
+
+[project.optional-dependencies]
+speech = ["sherpa-onnx==1.12.36"]
+test = ["pytest>=8,<10", "pytest-asyncio>=0.24,<2"]
+
+[project.scripts]
+jvoice-host = "jvoice.server:main"
+jvoice-agent = "jvoice.agent:main"
+jvoice-replay = "jvoice.replay:main"
+
+[tool.setuptools.packages.find]
+where = ["host"]
+
+[tool.pytest.ini_options]
+testpaths = ["host/tests"]
+asyncio_mode = "auto"
+
